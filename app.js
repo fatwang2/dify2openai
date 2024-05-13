@@ -67,6 +67,20 @@ app.get('/', (req, res) => {
   `);
 });
 
+app.get("/v1/models", (req, res) => {
+  res.status(200).json({
+    "object": "list",
+    "data": [
+      {
+        "id": "dify",
+        "object": "model",
+        "created": Math.floor(Date.now() / 1000),
+        "owned_by": "owner"
+      }
+    ]
+  });
+});
+
 app.post("/v1/chat/completions", async (req, res) => {
   const authHeader =
     req.headers["authorization"] || req.headers["Authorization"];
