@@ -35,6 +35,36 @@ pnpm install
 pnpm start
 ```
 
+### Docker Deployment
+
+- If you are using the official Dify API and you are creating a chat assistant, please use the following command:
+```
+docker run -d --name d2o \
+    --network bridge \
+    -p 3000:3000 \
+    -e DIFY_API_URL=https://api.dify.ai/v1 \
+    -e BOT_TYPE=Chat \
+    --restart always \
+    moeceo/dify2openai:latest
+```
+- You can also choose to use Docker Compose:
+```
+version: '3.5'
+services:
+  d2o:
+    container_name: d2o
+    image: moeceo/dify2openai:latest
+    network_mode: bridge
+    ports:
+      - "3000:3000"
+    restart: always
+    environment: 
+      - DIFY_API_URL=https://api.dify.ai/v1
+      - BOT_TYPE=Chat
+```
+
+Please change the environment variables according to your needs. See [Environment Variable](#environment-variable) for more info.
+
 ## Usage
 1. OpenAI Clients
 

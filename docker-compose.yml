@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  d2o:
+    container_name: d2o
+    image: moeceo/dify2openai:latest
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:4013:3000"
+    restart: always
+    environment: 
+      - DIFY_API_URL=https://api.dify.ai/v1
+      - BOT_TYPE=Chat
