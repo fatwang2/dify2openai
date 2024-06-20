@@ -1,4 +1,4 @@
-# 使用官方 Node.js 14 镜像作为基础镜像
+# 使用官方 Node.js lst 镜像作为基础镜像
 FROM node:20.14.0-alpine3.19
 
 # 设置工作目录
