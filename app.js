@@ -53,6 +53,23 @@ app.use((req, res, next) => {
   console.log('Request Path:', req.path);
   next();
 });
+
+// new router '/v1/models'
+app.get('/v1/models', (req, res) => {
+  const models = {
+    "object": "list",
+    "data": [
+      {
+        "id": "dify",
+        "object": "model",
+        "owned_by": "dify",
+        "permission": null,
+      }
+    ]
+  };
+  res.json(models);
+});
+
 app.get('/', (req, res) => {
   res.send(`
     <html>
