@@ -61,6 +61,45 @@ const response = await fetch('http://localhost:3000/v1/chat/completions', {
 const data = await response.json();
 console.log(data);
 ```
+
+### Docker Deployment
+
+- Build the image
+```bash
+docker build -t dify2openai:latest .
+```
+
+- Run the container
+```bash
+docker run -d -name dify2openai \
+    --network bridge \
+    -p 3000:3000 \
+    -e DIFY_API_URL=https://api.dify.ai/v1 \
+    -e BOT_TYPE=Chat \
+    --restart always
+    dify2openai:latest
+```
+
+- You can also use Docker Compose to build the image and run the container:
+```bash
+version: '3.5'
+services:
+  dify2openai:
+    container_name: dify2openai
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: bridge
+    ports:
+      - "3000:3000"
+    restart: always
+    environment: 
+      - DIFY_API_URL=https://api.dify.ai/v1
+      - BOT_TYPE=Chat
+```
+
+Please change the environment variables according to your needs.See [Environment Variable](#environment-variable) for more information.
+
 ## Environment Variable
 This project provides some additional configuration items set with environment variables:
 
@@ -70,6 +109,7 @@ This project provides some additional configuration items set with environment v
 | `BOT_TYPE`     | Yes      | The type of your dify bots                                                                                                                  | `Chat,Completion,Workflow`                                                                                                 |
 | `INPUT_VARIABLE`     | No      | The name of input variable in your own dify workflow bot                                                                                                                  | `query,text`                                                                                                 |
 | `OUTPUT_VARIABLE`     | No      | The name of output variable in your own dify workflow bot                                                                                                                  | `text`                                                                                                 |
+| `MODELS_NAME`     | No      | The value is the model name output by the /v1/models endpoint. The default value is `dify`.                                                                                                                 | `dify`                                                                                                 |
 ## Roadmap
 **Coming Soon**
 *   Image support
