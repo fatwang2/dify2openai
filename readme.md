@@ -98,6 +98,23 @@ services:
       - BOT_TYPE=Chat
 ```
 
+### Docker Image Deployment
+Prepared a Docker image for those who find it difficult to build.
+- Run the containerb
+```bash
+docker run -d  \
+    --network=bridge \
+    -p 3000:3000 \
+    -e DIFY_API_URL=https://api.dify.ai/v1 \
+    -e BOT_TYPE=Chat \
+    --restart always
+    fatwang2/dify2openai:latest
+```
+- Run the container with docker-compose-image.yml
+```bash
+docker compose -f docker-compose-image.yml up -d
+```
+
 Please change the environment variables according to your needs.See [Environment Variable](#environment-variable) for more information.
 
 ## Environment Variable

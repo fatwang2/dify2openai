@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  # dify2openai API relay service
+  dify2openai:
+    image: fatwang2/dify2openai:latest
+    container_name: dify2openai
+    network_mode: bridge
+    ports:
+      - "3000:3000"
+    restart: always
+    environment: 
+      - DIFY_API_URL=http://localhost/v1
+      - BOT_TYPE=Chat
+      - MODELS_NAME=dify
